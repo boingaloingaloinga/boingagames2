@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background: black;
+      color: white;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #txt, #date {
+      font-size: 5em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+      margin: 10px;
+    }
+
+    .fall {
+      position: absolute;
+      animation: fall 1s forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(500px) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    #message {
+      font-size: 3em;
+      color: red;
+      display: none;
+      margin-top: 20px;
+    }
+
+    #timezone-selector {
+      margin-top: 20px;
+      font-size: 1.2em;
+      background: #111;
+      color: white;
+      border: 1px solid #444;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body onload="init()">
+
+<div id="txt" onclick="fallApart('txt')"></div>
+<div id="date" onclick="fallApart('date')"></div>
+<select id="timezone-selector" onchange="restartClock()"></select>
+<div id="message">What have you done..</div>
+
+<audio id="bell" src="https://files.catbox.moe/damme3.mp3"></audio>
+
+<script>
+let timerInterval;
+let lastHour = null;
+let clockDestroyed = false;
+let dateDestroyed = false;
+
+function init() {
+  populateTimezones();
+  startTime();
+}
+
+function populateTimezones() {
+  const select = document.getElementById("timezone-selector");
+  const zones = [
+    "UTC", "America/New_York", "America/Chicago", "America/Denver",
+    "America/Los_Angeles", "America/Phoenix", "Europe/London",
+    "Europe/Paris", "Europe/Berlin", "Asia/Tokyo",
+    "Asia/Shanghai", "Asia/Kolkata", "Australia/Sydney"
+  ];
+  const defaultZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  zones.forEach(zone => {
+    const option = document.createElement("option");
+    option.value = zone;
+    option.textContent = zone.replace("_", " ");
+    if (zone === defaultZone) option.selected = true;
+    select.appendChild(option);
+  });
+}
+
+function getSelectedTimeZone() {
+  const select = document.getElementById("timezone-selector");
+  return select.value || Intl.DateTimeFormat().resolvedOptions().timeZone;
+}
+
+function restartClock() {
+  clearInterval(timerInterval);
+  startTime();
+}
+
+function startTime() {
+  updateTime(); 
+  timerInterval = setInterval(updateTime, 1000);
+}
+
+function updateTime() {
+  if (clockDestroyed && dateDestroyed) return;
+
+  const zone = getSelectedTimeZone();
+  const now = new Date();
+
+  const timeFormatter = new Intl.DateTimeFormat("en-US", {
+    hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true,
+    timeZone: zone
+  });
+
+  const hour24Formatter = new Intl.DateTimeFormat("en-US", {
+    hour: "numeric", hour12: false, timeZone: zone
+  });
+
+  const dateFormatter = new Intl.DateTimeFormat("en-US", {
+    weekday: "long", year: "numeric", month: "long", day: "numeric", timeZone: zone
+  });
+
+  const timeStr = timeFormatter.format(now);
+  const dateStr = dateFormatter.format(now);
+  const hourNow = parseInt(hour24Formatter.format(now));
+
+  if (!clockDestroyed) {
+    document.getElementById("txt").textContent = timeStr;
+  }
+  if (!dateDestroyed) {
+    document.getElementById("date").textContent = dateStr;
+  }
+
+  const currentMinute = now.getMinutes();
+  const currentSecond = now.getSeconds();
+  if (currentMinute === 0 && currentSecond === 0 && lastHour !== hourNow) {
+    playBells(hourNow);
+    lastHour = hourNow;
+  }
+}
+
+function fallApart(id) {
+  const element = document.getElementById(id);
+  const text = element.textContent;
+  element.textContent = '';
+
+  for (let i = 0; i < text.length; i++) {
+    const span = document.createElement("span");
+    span.textContent = text[i];
+    span.style.left = `${i * 30}px`;
+    span.classList.add("fall");
+    span.style.position = "absolute";
+    span.style.top = "0px";
+    element.appendChild(span);
+  }
+
+  if (id === "txt") clockDestroyed = true;
+  if (id === "date") dateDestroyed = true;
+
+  if (clockDestroyed && dateDestroyed) {
+    clearInterval(timerInterval);
+    document.getElementById("message").style.display = 'block';
+  }
+}
+
+function playBells(hour) {
+  const bell = document.getElementById("bell");
+  const count = hour % 12 || 12;
+  let i = 0;
+
+  function ring() {
+    if (i >= count) return;
+    bell.currentTime = 0;
+    bell.play();
+    i++;
+    setTimeout(ring, 1500);
+  }
+
+  ring();
+}
+</script>
+
+</body>
+</html>

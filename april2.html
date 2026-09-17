@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoingaGames</title>
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
+    <link rel="icon" href="bg.png" type="image/png">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1706522083410497"
+        crossorigin="anonymous"></script>
+    <style>
+         body {
+      		font-family: Arial, sans-serif;
+      		margin: 0;
+      		padding: 0;
+      		overflow-x: hidden;
+      		transition: background 0.5s, color 0.5s;
+            	background: linear-gradient(135deg, #1e1e2f, #3a3b5b);
+      		color: #ffcc00;
+    	}
+
+        nav h1 {
+            font-size: 72px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #ffcc00;
+            -webkit-text-stroke-width: 3px;
+            -webkit-text-stroke-color: #d4a900;
+            text-align: center;
+            margin: 20px 0 10px 0;
+        }
+
+        .boinga-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .boinga-container img {
+            height: 50px; /* Adjust size as needed */
+        }
+
+        nav p.quote {
+            font-size: 24px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #ffcc00;
+            text-align: center;
+            margin: 0 0 30px 0;
+        }
+
+        nav p.blake {
+            font-size: 24px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #FF0000;
+            text-align: center;
+            margin: 0 0 30px 0;
+        }
+
+        nav p.changelog {
+            font-size: 12px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #ffcc00;
+            text-align: center;
+            margin: 0 0 30px 0;
+        }
+
+        nav p.left {
+            font-size: 36px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #FF0000;
+            text-align: center;
+            margin: 0 0 30px 0;
+        }
+
+        .search {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .search input[type="text"] {
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .search button {
+            padding: 10px;
+            font-size: 18px;
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #games {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #games a {
+            margin: 10px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        #games a:hover {
+            transform: scale(1.1);
+        }
+
+        .content hr {
+            border: none;
+            height: 2px;
+            background-color: #ffcc00;
+            margin: 40px 0;
+        }
+
+        #codeInputBar {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #000;
+            padding: 20px;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        #codeInputBar input[type="text"] {
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            width: 300px;
+        }
+
+        #codeInputBar button {
+            padding: 10px;
+            font-size: 18px;
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+#xp-window {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999; /* Always on top */
+  pointer-events: none; /* Allows clicking through it */
+}
+
+.xp-window-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+        #upload-theme-container {
+          margin-top: 10px;
+        }
+
+        #background-upload {
+          margin-left: 10px;
+        }
+
+        .center {
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        #codeInputBar .closeBtn {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 24px;
+            color: #ffcc00;
+            cursor: pointer;
+        }
+
+        #codeInputBar .message {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #ffcc00;
+        }
+
+        #codeInputBar .error {
+            color: red;
+        }
+
+        .rating-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .rating-section input {
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .rating-section button {
+            padding: 10px;
+            font-size: 18px;
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .rating-result {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #ffcc00;
+        }
+    /* Theme buttons */
+
+        #themes-container {
+      text-align: center;
+    }
+
+    .themes-header {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    #toggle-themes-btn {
+      font-size: 1em;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+
+    
+    .theme-btn {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      cursor: pointer;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .theme-btn:hover {
+      background-color: #e0e0e0;
+    }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="boinga-container">
+            <img src="https://files.catbox.moe/vbm3pi.gif" alt="Boinga GIF">
+            <h1>BOINGA</h1>
+            <img src="https://files.catbox.moe/vbm3pi.gif" alt="Boinga GIF">
+        </div>
+        <p class="quote">"Boingaloingaloinga!"</p>
+        <p class="changelog">DO YOUR WORK.</p>
+    </nav>
+
+<audio id="background-music" loop></audio>
+
+<script>
+  const themesContainer = document.getElementById('themes-container');
+  const themesSection = document.getElementById('themes');
+  const toggleThemesBtn = document.getElementById('toggle-themes-btn');
+  const backgroundUpload = document.getElementById('background-upload');
+
+  toggleThemesBtn.addEventListener('click', () => {
+    if (themesSection.style.maxHeight === '0px' || themesSection.style.maxHeight === '') {
+      themesSection.style.maxHeight = themesSection.scrollHeight + 'px'; 
+      toggleThemesBtn.textContent = '-'; 
+    } else {
+      themesSection.style.maxHeight = '0';
+      toggleThemesBtn.textContent = '+';
+    }
+  });
+
+  function applyTheme(theme) {
+    switch (theme) {
+      case 'default':
+        document.body.style.background = 'linear-gradient(to right, #1e1e2f, #3a3b5b)';
+        document.body.style.color = '#ffcc00';
+        break;
+      case 'blossom':
+        document.body.style.background = 'linear-gradient(to right, #ffafcc, #ffcad4)';
+        document.body.style.color = '#880e4f';
+        break;
+      case 'iridium':
+        document.body.style.background = 'linear-gradient(to right, #333, #666)';
+        document.body.style.color = '#ddd';
+        break;
+      case 'sunset':
+        document.body.style.background = 'linear-gradient(to right, #ff7e5f, #feb47b)';
+        document.body.style.color = '#4b2e05';
+        break;
+      case 'forest':
+        document.body.style.background = 'linear-gradient(to right, #228B22, #014421)';
+        document.body.style.color = '#90EE90';
+        break;
+      case 'ocean':
+        document.body.style.background = 'linear-gradient(to right, #064273, #76b6c4)';
+        xpWindow.style.display = 'none';
+        break;
+      case 'volcano':
+        document.body.style.background = 'linear-gradient(to right, #823661, #4E2728)';
+        document.body.style.color = '#1da2d8';
+        break;
+      case 'cotton':
+        document.body.style.background = 'linear-gradient(to right, #E9B7CE, #D3F3F1)';
+        document.body.style.color = '#DCD9E2';
+        break;
+      case 'flame':
+        document.body.style.background = 'linear-gradient(to right, #e9d022, #e60b09)';
+        document.body.style.color = '#e60b09';
+        break;
+      case 'meadow':
+        document.body.style.background = 'linear-gradient(to right, #56AB2F, #A8E063)';
+        document.body.style.color = '#56AB2F';
+        break;
+      case 'aurora':
+        document.body.style.background = 'linear-gradient(to right, #2E1A47, #16A085)';
+        document.body.style.color = '#2E1A47';
+        break;
+      case 'yinyang':
+        document.body.style.background = 'linear-gradient(to right, #E6DADA, #274046)';
+        document.body.style.color = '#E6DADA';
+        break;
+      case 'desert':
+        document.body.style.background = 'linear-gradient(to right, #FCEABB, #E1B850)';
+        document.body.style.color = '#E1B850';
+        break;
+      case 'mist':
+        document.body.style.background = 'linear-gradient(to right, #757F9A, #D7DDE8)';
+        document.body.style.color = '#757F9A';
+        break;
+      case 'space':
+        document.body.style.background = 'url("space.gif") repeat';
+        document.body.style.backgroundSize = '100% 120%';
+        document.body.style.backgroundAttachment = 'fixed';
+        document.body.style.color = 'transparent';
+        document.body.style.backgroundClip = 'text';
+        document.body.style.webkitBackgroundClip = 'text';
+        break;
+      case 'george':
+        document.body.style.background = 'url("georgebg.jpg")';
+        document.body.style.backgroundSize = '100% 120%';
+        document.body.style.backgroundAttachment = 'fixed';
+        break;
+     case 'xp':
+        document.body.style.background = 'url("xp.png")';
+        document.body.style.backgroundSize = '100% 120%';
+        document.body.style.backgroundAttachment = 'fixed';
+        break;
+      case 'custom':
+        const savedCustomBackground = localStorage.getItem('customBackground');
+        if (savedCustomBackground) {
+          document.body.style.background = `url('${savedCustomBackground}') no-repeat center center fixed`;
+          document.body.style.backgroundSize = '100% 120%';
+          xpWindow.style.display = 'none';
+        }
+        break;
+    }
+  }
+
+  const themeButtons = document.querySelectorAll('.theme-btn');
+  themeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const theme = button.getAttribute('data-theme');
+      localStorage.setItem('selectedTheme', theme);
+      applyTheme(theme);
+    });
+  });
+
+  backgroundUpload.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const dataUrl = e.target.result;
+
+        document.body.style.background = `url('${dataUrl}') no-repeat center center fixed`;
+        document.body.style.backgroundSize = '100% 120%';
+        localStorage.setItem('customBackground', dataUrl);
+        localStorage.setItem('selectedTheme', 'custom');
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  const savedTheme = localStorage.getItem('selectedTheme');
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  }
+</script>
+
+<!-- Optional CSS to change color on hover -->
+<style>
+    button:hover {
+        color: #ffd700;
+        border-color: #ffd700;
+    }
+</style>
+
+    <div id="games">
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+        <a href="https://ocps.instructure.com/"><img src="images/canvas.png" width="96" height="96" alt="Canvas"></a>
+    </div>
+
+<script>
+    document.getElementById('firered-link').addEventListener('click', function(event) {
+        event.preventDefault();
+        let choice = confirm("Press OK for Normal, Cancel for Randomized.");
+        let baseURL = "games/firered/";
+        if (choice) {
+            window.location.href = baseURL;
+        } else {
+            window.location.href = baseURL + "random/";
+        }
+    });
+</script>
+
+<script>
+    document.getElementById('gold-link').addEventListener('click', function(event) {
+        event.preventDefault();
+        let choice = confirm("Press OK for Normal, Cancel for Randomized.");
+        let baseURL = "games/gold/";
+        if (choice) {
+            window.location.href = baseURL;
+        } else {
+            window.location.href = baseURL + "random/";
+        }
+    });
+</script>
+
+<script>
+    document.getElementById('sapphire-link').addEventListener('click', function(event) {
+        event.preventDefault();
+        let choice = confirm("Press OK for Normal, Cancel for Randomized.");
+        let baseURL = "games/sapphire/";
+        if (choice) {
+            window.location.href = baseURL;
+        } else {
+            window.location.href = baseURL + "random/";
+        }
+    });
+</script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const images = document.querySelectorAll('img');
+
+            images.forEach(function(img) {
+                img.setAttribute('loading', 'lazy');
+            });
+        });
+    </script>
+
+    <script>
+        function sortGames() {
+            const gamesContainer = document.getElementById('games');
+            const games = Array.from(gamesContainer.getElementsByTagName('a'));
+
+            games.sort((a, b) => {
+                const altA = a.querySelector('img').alt.toUpperCase();
+                const altB = b.querySelector('img').alt.toUpperCase();
+                return altA.localeCompare(altB);
+            });
+
+            games.forEach(game => {
+                gamesContainer.appendChild(game);
+            });
+        }
+
+        document.getElementById('curiousGeorge').onclick = function() {
+            document.getElementById('codeInputBar').style.display = 'block';
+        };
+
+        document.querySelector('.closeBtn').onclick = function() {
+            document.getElementById('codeInputBar').style.display = 'none';
+            document.getElementById('codeInput').value = ''
+            document.getElementById('message').textContent = '';
+        };
+
+        document.getElementById('submitCode').onclick = function() {
+            const input = document.getElementById('codeInput').value.trim();
+            const messageBox = document.getElementById('message');
+
+        if (input === "chaotix") {
+            window.location.href = 'games/knuckles/';
+            return;
+        }
+
+        if (input === "OG") {
+            window.location.href = '/boingagames/original.html';
+            return;
+        }
+
+        if (input === "Super Secret") {
+            window.location.href = '/boingagames/time.html';
+            return;
+        }
+
+
+        if (input === "DEER") {
+            window.location.href = 'games/deer/';
+            return;
+        }
+
+        if (input === "april") {
+            window.location.href = '/boingagames/april.html';
+            return;
+        }
+
+        if (input === "boinga") {
+            window.location.href = '/boingagames/boinga.html';
+            return;
+        }
+
+        if (input === "parappa") {
+            window.location.href = 'games/parappa/';
+            return;
+        }
+
+        if (input === "DVD") {
+            window.location.href = '/boingagames/dvd.html';
+            return;
+        }
+
+        if (input === "clock") {
+            window.location.href = '/boingagames/clock.html';
+            return;
+        }
+
+        if (input === "place") {
+            window.location.href = '/boingagames/boingaplace.html';
+            return;
+        }
+
+            fetch('codes.txt')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    const codes = data.split('\n').map(line => line.split(':'));
+                    const match = codes.find(code => code[0].trim() === input);
+
+                    if (match) {
+                        messageBox.textContent = match[1].trim();
+                        messageBox.className = 'message';
+                    } else {
+                        messageBox.textContent = 'X';
+                        messageBox.className = 'message error';
+                    }
+                })
+                .catch(error => {
+                    messageBox.textContent = 'X';
+                    messageBox.className = 'message error';
+                });
+        };
+
+        document.getElementById('submitRating').onclick = function() {
+            const ratingInput = document.getElementById('ratingInput').value.trim();
+            const ratingResult = document.getElementById('ratingResult');
+
+            ratingResult.textContent = "Thank you for rating.. You gave us.. Uh.. Hold On.. I need to find the ratings.. Give me a second.. almost got them wait no that's not it.. Hold on.. I think this is wait no.. Maybe is it this one? Nope nope, not ratings.. Give me time to think about this."
+        };
+    </script>
+
+<div id="xp-window">
+  <img src="xp-window.jpg" alt="Windows XP Window" class="xp-window-image">
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

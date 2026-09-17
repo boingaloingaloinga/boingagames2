@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movies</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #ece9e6, #ffffff);
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    h1 {
+      margin: 20px 0;
+      font-size: 2.5rem;
+      color: #222;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      padding: 30px;
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    .movie {
+      perspective: 1000px;
+    }
+
+    .movie a {
+      display: block;
+      border-radius: 15px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      transform-style: preserve-3d;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .movie a:hover {
+      transform: rotateY(5deg) rotateX(5deg) translateY(-10px);
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .movie img {
+      width: 100%;
+      height: 600px; /* taller for full movie poster */
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .movie a:hover img {
+      transform: scale(1.05);
+    }
+
+    .movie-title {
+      padding: 12px;
+      font-weight: bold;
+      background: #fff;
+      transition: color 0.3s;
+    }
+
+    .movie a:hover .movie-title {
+      color: #ff4c00;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 1300px) {
+      .movie img {
+        height: 500px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .movie img {
+        height: 400px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Movies</h1>
+  <div class="container">
+<div class="movie">
+  <a href="https://boingagames.onrender.com/curious/">
+    <img src="https://i.ebayimg.com/images/g/mC4AAOSwjqxeZ9SX/s-l1200.jpg" alt="Curious George">
+    <div class="movie-title">Curious George</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="halloween.html">
+    <img src="https://m.media-amazon.com/images/M/MV5BNDY3NTE3MDYxOV5BMl5BanBnXkFtZTgwMDAzODA2MDE@._V1_FMjpg_UX1000_.jpg" alt="Curious George: A Halloween Boofest!">
+    <div class="movie-title">Curious George: A Halloween Boofest!</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="christmas.html">
+    <img src="https://m.media-amazon.com/images/M/MV5BMjRkNzg2YTctYjJhMy00ZjIyLWFmNWUtMjczNWNkODAwOTFmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Curious George: A Very Monkey Christmas!">
+    <div class="movie-title">Curious George: A Very Monkey Christmas!</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="sponge.html">
+    <img src="https://i.ebayimg.com/00/s/MTYwMFgxMDY2/z/x~QAAOSw1PdgnGpR/$_57.JPG?set_id=8800005007" alt="The Spongebob Squarepants Movie">
+    <div class="movie-title">The Spongebob Squarepants Movie</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="muppets.html">
+    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/89/Muppets_ver4.jpg/250px-Muppets_ver4.jpg" alt="The Muppet Movie (2011)">
+    <div class="movie-title">The Muppet Movie (2011)</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="wanted.html">
+    <img src="https://images.moviesanywhere.com/e5fe25500e937ec8f88e1891d53124d3/c0742579-3d14-4679-a65e-8fe84220f6aa.jpg" alt="The Muppet Movie: Muppets Most Wanted">
+    <div class="movie-title">The Muppet Movie: Muppets Most Wanted</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="lego.html">
+    <img src="https://musicart.xboxlive.com/7/9f0a5100-0000-0000-0000-000000000002/504/image.jpg" alt="The Lego Movie">
+    <div class="movie-title">The Lego Movie</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="batman.html">
+    <img src="https://m.media-amazon.com/images/M/MV5BMTcyNTEyOTY0M15BMl5BanBnXkFtZTgwOTAyNzU3MDI@._V1_FMjpg_UX1000_.jpg" alt="The Lego Batman Movie">
+    <div class="movie-title">The Lego Batman Movie</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="wimpy.html">
+    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/e2/Diary_of_a_Wimpy_Kid_%282010_film%29_poster.jpg/250px-Diary_of_a_Wimpy_Kid_%282010_film%29_poster.jpg" alt="Diary Of A Wimpy Kid">
+    <div class="movie-title">Diary Of A Wimpy Kid</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="rodrick.html">
+    <img src="https://m.media-amazon.com/images/M/MV5BMTcxNDYwOTEzMl5BMl5BanBnXkFtZTcwOTA3MzY3NA@@._V1_.jpg" alt="Diary Of A Wimpy Kid: Rodrick Rules">
+    <div class="movie-title">Diary Of A Wimpy Kid: Rodrick Rules</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="dog.html">
+    <img src="https://upload.wikimedia.org/wikipedia/en/5/57/Diary_of_a_Wimpy_Kid_-_Dog_Days_movie_poster.jpg" alt="Diary Of A Wimpy Kid: Dog Days">
+    <div class="movie-title">Diary Of A Wimpy Kid: Dog Days</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="sonic1.html">
+    <img src="https://upload.wikimedia.org/wikipedia/en/4/45/Sonic_the_Hedgehog_film_poster.jpg" alt="Sonic The Hedgehog">
+    <div class="movie-title">Sonic The Hedgehog</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="sonic2.html">
+    <img src="https://m.media-amazon.com/images/M/MV5BMDBiYzk0YTMtNWRiYi00YWY0LWE3NjgtYmJiYTAwZmYzOTM0XkEyXkFqcGc@._V1_.jpg" alt="Sonic The Hedgehog 2">
+    <div class="movie-title">Sonic The Hedgehog 2</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="sonic3.html">
+    <img src="https://upload.wikimedia.org/wikipedia/en/f/f2/Sonic_the_Hedgehog_3_film_poster.jpg" alt="Sonic The Hedgehog 3">
+    <div class="movie-title">Sonic The Hedgehog 3</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="bttf.html">
+    <img src="https://upload.wikimedia.org/wikipedia/en/d/d2/Back_to_the_Future.jpg" alt="Back To The Future">
+    <div class="movie-title">Back To The Future</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="rock.html">
+    <img src="https://upload.wikimedia.org/wikipedia/en/1/11/School_of_Rock_Poster.jpg" alt="School Of Rock">
+    <div class="movie-title">School Of Rock</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="nacho.html">
+    <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQS2aAZPJr9XW43n4SgZLOInzDm_KpLsh6Mg9ArBKVuWj9d4bj4-Jg4cMlDQR6OpTFxFdPV" alt="Nacho Libre">
+    <div class="movie-title">Nacho Libre</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="goofy.html">
+    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcS3K-KXdcWUZDIWuqs9QwcVsUgXbPmIZfDNkLFKVuBBC8dIK8w12UUJEq9mQqEOddgZzNA_XQ" alt="A Goofy Movie">
+    <div class="movie-title">A Goofy Movie</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="dogman.html">
+    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSsFIA8PwcujdiEBhpGNlZj2ZPd-DhutzxLrAMrJvXsiWzWcFC8rP-zmh2W3UP_qGzH4CSvqw" alt="Dog Man">
+    <div class="movie-title">Dog Man</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="captain.html">
+    <img src="https://i.ebayimg.com/00/s/MTMxNFg5MDA=/z/9w4AAOSwIEpgbvux/$_57.JPG?set_id=8800005007" alt="Captain Underpants: The First Epic Movie">
+    <div class="movie-title">Captain Underpants: The First Epic Movie</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="croods.html">
+    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSaYx-qOP4faVy7OM-rsIkN4WE_RWqix4K8oWbwxr3KBEzbxlt8A-OdeAx7E0qOK6DHgNC4Uw" alt="The Croods">
+    <div class="movie-title">The Croods</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="avengers.html">
+    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQluFl3GfQDXohBaH-xG3GuRi8T4MDIQPRpCqUGLiE5tXdXbUO0hRFwnshvzg07igEgGg7i" alt="The Avengers">
+    <div class="movie-title">The Avengers</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="rango.html">
+    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcStBYhybZBjk1OW8lSjTmoJOajGsHveqZhdDCqEk0XAxlLYAibHdKFVo0x3MUvV-Zv4WqDl" alt="Rango">
+    <div class="movie-title">Rango</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="shrek.html">
+    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQg_Lj-AwA3TKS-FSwZ8c8V0zDIA4cnGrMGz0tGfAzakmcYhWr6ndm6EXpSrYYXCprXW9d6" alt="Shrek">
+    <div class="movie-title">Shrek</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="shrek2.html">
+    <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTB4nQHkVygjUx0Cad3i51hOLXd2WxGsbOHNBuyLDYVG7dTM0Lg5JMQSiE8YZod66Rbr_xvKg" alt="Shrek 2">
+    <div class="movie-title">Shrek 2</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="pussinboots.html">
+    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQBI-ZkqVDJYLGXvGCo6Z99JXrTupmwpGV6WGllfgSDXX4YXhExM6Ph79gKWVnw07m58W0-Aw" alt="Puss In Boots">
+    <div class="movie-title">Puss In Boots</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="pussinboots2.html">
+    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSX2q5n3N0MEsdRnUy44WM1sxy-R44S8dXu-mmceQyMVDbOd-9qMbKkv-arS726F685U1TI" alt="Puss In Boots: The Last Wish">
+    <div class="movie-title">Puss In Boots: The Last Wish</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="httyd.html">
+    <img src="https://m.media-amazon.com/images/I/51uJGH71GsL.jpg" alt="How To Train Your Dragon">
+    <div class="movie-title">How To Train Your Dragon</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="httyd2.html">
+    <img src="https://upload.wikimedia.org/wikipedia/en/a/af/How_to_Train_Your_Dragon_2_poster.jpg" alt="How To Train Your Dragon 2">
+    <div class="movie-title">How To Train Your Dragon 2</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="httyd3.html">
+    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR-PYOiZILAaGhTnvJ5q-uaLIBbpRFwiecmHCCdUvYydhivpZC0TEv4F4xkhoDwDCIkYBhd" alt="How To Train Your Dragon: The Hidden World">
+    <div class="movie-title">How To Train Your Dragon: The Hidden World</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="minecraft.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvI5KTA7BcyEMh1-ReAKnD97wOQdYoGXvTZ8pB91EEG7A420ChxrBOqlGdVOy9PSJanneK8g" alt="A Minecraft Movie">
+    <div class="movie-title">A Minecraft Movie</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="cars.html">
+    <img src="https://m.media-amazon.com/images/I/91J9Eoa0udL.jpg" alt="Cars">
+    <div class="movie-title">Cars</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="cars2.html">
+    <img src="https://www.originalfilmart.com/cdn/shop/products/cars_2_2011_teaser_original_film_art_5000x.jpg?v=1574445842" alt="Cars 2">
+    <div class="movie-title">Cars 2</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="madagascar.html">
+    <img src="https://image.tmdb.org/t/p/original/zMpJY5CJKUufG9OTw0In4eAFqPX.jpg" alt="Madagascar">
+    <div class="movie-title">Madagascar</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="madagascar2.html">
+    <img src="https://i.ebayimg.com/images/g/gTIAAOSw0clmaAz9/s-l1200.jpg" alt="Madagascar: Escape 2 Africa">
+    <div class="movie-title">Madagascar: Escape 2 Africa</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="madagascar3.html">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYBxvRkMNaygtC3GOwLuk3crqABUwwudSeZQ&s" alt="Madagascar 3: Europe's Most Wanted">
+    <div class="movie-title">Madagascar 3: Europe's Most Wanted</div>
+  </a>
+</div>
+
+<div class="movie">
+  <a href="penguins.html">
+    <img src="https://m.media-amazon.com/images/I/71BjMdsGStL._AC_UF894,1000_QL80_.jpg" alt="Penguins of Madagascar">
+    <div class="movie-title">Penguins of Madagascar</div>
+  </a>
+</div>
+  </div>
+</body>
+</html>

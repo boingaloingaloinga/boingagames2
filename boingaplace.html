@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Boinga Art Together!</title>
+  <style>
+    body {
+      margin: 0; overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      background: #f0f0f0;
+    }
+    #canvas {
+      border: 1px solid black;
+      background: white;
+      cursor: crosshair;
+      display: block;
+      margin: 10px auto;
+      image-rendering: pixelated;
+    }
+    #palette {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #eee;
+      padding: 5px;
+      border-radius: 5px;
+      max-width: 800px;
+      display: flex;
+      flex-wrap: wrap;
+      user-select: none;
+      z-index: 10;
+    }
+    #palette button {
+      width: 24px; height: 24px;
+      margin: 2px;
+      border: 1px solid #333;
+      cursor: pointer;
+      padding: 0;
+      outline: none;
+    }
+    #palette button.selected {
+      border: 3px solid black;
+    }
+  </style>
+</head>
+<body>
+  <div id="palette"></div>
+  <canvas id="canvas" width="600" height="400"></canvas>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <script>
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyB4CQITpSiJ0-JtyCvF3svLfIuA1naxyw8",
+      authDomain: "boingaplace.firebaseapp.com",
+      databaseURL: "https://boingaplace-default-rtdb.firebaseio.com",
+      projectId: "boingaplace",
+      storageBucket: "boingaplace.firebasestorage.app",
+      messagingSenderId: "862257818794",
+      appId: "1:862257818794:web:3d7c39398dbe4f44c8f4d3"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const palette = document.getElementById('palette');
+
+    const WORLD_WIDTH = 500;
+    const WORLD_HEIGHT = 500;
+
+    let offsetX = 0;
+    let offsetY = 0;
+    let zoom = 1;
+
+    const colors = [
+      '#FFFFFF','#C0C0C0','#808080','#000000',
+      '#FF0000','#800000','#FFFF00','#808000',
+      '#00FF00','#008000','#00FFFF','#008080',
+      '#0000FF','#000080','#FF00FF','#800080',
+      '#FFA07A','#FA8072','#E9967A','#F08080',
+      '#CD5C5C','#DC143C','#B22222','#8B0000',
+      '#FF4500','#FF6347','#FF7F50','#FF8C00',
+      '#FFA500','#FFD700','#FFFFE0','#FFFACD',
+      '#FAFAD2','#FFEFD5','#FFE4B5','#FFDAB9',
+      '#EEE8AA','#F0E68C','#BDB76B','#ADFF2F',
+      '#7FFF00','#7CFC00','#00FF7F','#00FA9A',
+      '#40E0D0','#48D1CC','#00CED1','#20B2AA'
+    ];
+    let selectedColor = colors[4];
+
+    function buildPalette() {
+      palette.innerHTML = '';
+      colors.forEach(color => {
+        const btn = document.createElement('button');
+        btn.style.backgroundColor = color;
+        if(color === selectedColor) btn.classList.add('selected');
+        btn.addEventListener('click', () => {
+          selectedColor = color;
+          [...palette.children].forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+        });
+        palette.appendChild(btn);
+      });
+    }
+    buildPalette();
+
+    const pixelCache = new Map();
+
+    let drawPending = false;
+    function scheduleDraw() {
+      if(drawPending) return;
+      drawPending = true;
+      requestAnimationFrame(() => {
+        draw();
+        drawPending = false;
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const pixelsX = Math.ceil(canvas.width / zoom);
+      const pixelsY = Math.ceil(canvas.height / zoom);
+
+      ctx.imageSmoothingEnabled = false;
+
+      for(let y = 0; y < pixelsY; y++) {
+        for(let x = 0; x < pixelsX; x++) {
+          const worldX = x + offsetX;
+          const worldY = y + offsetY;
+          if(worldX < 0 || worldY < 0 || worldX >= WORLD_WIDTH || worldY >= WORLD_HEIGHT) continue;
+
+          const key = `${worldX},${worldY}`;
+          const color = pixelCache.get(key) || '#FFFFFF';
+          ctx.fillStyle = color;
+          ctx.fillRect(x * zoom, y * zoom, zoom, zoom);
+        }
+      }
+    }
+
+    let pixelsListening = false;
+
+    function updatePixelCache(snapshot) {
+      const key = snapshot.key;
+      const color = snapshot.val();
+      pixelCache.set(key, color);
+      const [x, y] = key.split(',').map(Number);
+      const pixelsX = Math.ceil(canvas.width / zoom);
+      const pixelsY = Math.ceil(canvas.height / zoom);
+      if(x >= offsetX && x < offsetX + pixelsX &&
+         y >= offsetY && y < offsetY + pixelsY) {
+        scheduleDraw();
+      }
+    }
+
+    function initializePixels() {
+      database.ref('pixels').once('value', snapshot => {
+        if (!snapshot.exists()) {
+          const initialData = {};
+          for(let y=0; y<WORLD_HEIGHT; y++) {
+            for(let x=0; x<WORLD_WIDTH; x++) {
+              initialData[`${x},${y}`] = '#FFFFFF';
+            }
+          }
+          database.ref('pixels').set(initialData);
+        }
+      });
+    }
+
+    function fetchPixels() {
+      if(!pixelsListening) {
+        pixelsListening = true;
+        database.ref('pixels').on('child_added', updatePixelCache);
+        database.ref('pixels').on('child_changed', updatePixelCache);
+      }
+    }
+
+    // Drag & pan with click detection fix
+    let isDragging = false;
+    let dragStartX, dragStartY;
+    let dragStartOffsetX, dragStartOffsetY;
+    let hasMoved = false;
+
+    canvas.addEventListener('mousedown', e => {
+      isDragging = true;
+      hasMoved = false;
+      dragStartX = e.clientX;
+      dragStartY = e.clientY;
+      dragStartOffsetX = offsetX;
+      dragStartOffsetY = offsetY;
+      canvas.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mouseup', e => {
+      isDragging = false;
+      canvas.style.cursor = 'crosshair';
+    });
+
+    let lastDragTime = 0;
+    window.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      const now = performance.now();
+      if (now - lastDragTime < 33) return; // ~30fps throttle
+      lastDragTime = now;
+
+      const dx = e.clientX - dragStartX;
+      const dy = e.clientY - dragStartY;
+
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+        hasMoved = true;
+      }
+
+      offsetX = Math.min(WORLD_WIDTH - 1, Math.max(0, dragStartOffsetX - dx / zoom));
+      offsetY = Math.min(WORLD_HEIGHT - 1, Math.max(0, dragStartOffsetY - dy / zoom));
+      offsetX = Math.round(offsetX);
+      offsetY = Math.round(offsetY);
+      scheduleDraw();
+    });
+
+    canvas.addEventListener('click', e => {
+      if (hasMoved) {
+        // Drag happened, ignore click for pixel placement
+        return;
+      }
+
+      const rect = canvas.getBoundingClientRect();
+      const mx = e.clientX - rect.left;
+      const my = e.clientY - rect.top;
+
+      const worldX = Math.floor(offsetX + mx / zoom);
+      const worldY = Math.floor(offsetY + my / zoom);
+
+      if (worldX < 0 || worldY < 0 || worldX >= WORLD_WIDTH || worldY >= WORLD_HEIGHT) return;
+
+      const key = `${worldX},${worldY}`;
+      database.ref(`pixels/${key}`).set(selectedColor);
+      pixelCache.set(key, selectedColor);
+      scheduleDraw();
+    });
+
+    // Fixed zoom and pan clamp for smooth zooming
+    canvas.addEventListener('wheel', e => {
+      e.preventDefault();
+
+      const rect = canvas.getBoundingClientRect();
+      const mx = e.clientX - rect.left;
+      const my = e.clientY - rect.top;
+
+      const oldZoom = zoom;
+      if (e.deltaY < 0) {
+        zoom *= 1.1;
+      } else {
+        zoom /= 1.1;
+      }
+      zoom = Math.min(Math.max(zoom, 1), 20);
+
+      // Calculate world coords before zoom change
+      const worldX = offsetX + mx / oldZoom;
+      const worldY = offsetY + my / oldZoom;
+
+      // Adjust offset so the zoom is centered on mouse position
+      offsetX = worldX - mx / zoom;
+      offsetY = worldY - my / zoom;
+
+      // Clamp offset so you don't pan outside canvas bounds at current zoom
+      const maxOffsetX = WORLD_WIDTH - canvas.width / zoom;
+      const maxOffsetY = WORLD_HEIGHT - canvas.height / zoom;
+
+      offsetX = Math.min(Math.max(offsetX, 0), maxOffsetX > 0 ? maxOffsetX : 0);
+      offsetY = Math.min(Math.max(offsetY, 0), maxOffsetY > 0 ? maxOffsetY : 0);
+
+      offsetX = Math.round(offsetX);
+      offsetY = Math.round(offsetY);
+
+      scheduleDraw();
+    }, { passive: false });
+
+    initializePixels();
+    fetchPixels();
+    draw();
+  </script>
+</body>
+</html>

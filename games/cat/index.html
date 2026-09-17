@@ -1,0 +1,22 @@
+<iframe class="game-iframe" id="game-area" src="https://gswitch3.github.io/g8/cat-trap/" width="1010" height="672" scrolling="none" frameborder="0" allowfullscreen></iframe>
+
+<button id="fullscreen-btn" style="margin-top: 10px;">Fullscreen</button>
+
+<script>
+  const iframe = document.getElementById('game-area');
+  const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+  fullscreenBtn.addEventListener('click', () => {
+    if (iframe.requestFullscreen) {
+      iframe.requestFullscreen();
+    } else if (iframe.mozRequestFullScreen) { // Firefox
+      iframe.mozRequestFullScreen();
+    } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari, Opera
+      iframe.webkitRequestFullscreen();
+    } else if (iframe.msRequestFullscreen) { // IE/Edge
+      iframe.msRequestFullscreen();
+    } else {
+      alert('Fullscreen mode is not supported on this browser.');
+    }
+  });
+</script>

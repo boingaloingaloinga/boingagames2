@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BoingaDVD</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      overflow: hidden;
+    }
+    #dvd {
+      position: absolute;
+      width: 128px;
+      height: auto;
+      user-select: none;
+      pointer-events: none;
+      filter: hue-rotate(0deg);
+    }
+  </style>
+</head>
+<body>
+  <img id="dvd" src="https://files.catbox.moe/3xcrnb.gif" alt="DVD Logo">
+
+  <script>
+    const dvd = document.getElementById("dvd");
+    let x = 100;
+    let y = 100;
+    let dx = 3;
+    let dy = 2;
+    let hue = 0;
+
+    function move() {
+      const maxX = window.innerWidth - dvd.offsetWidth;
+      const maxY = window.innerHeight - dvd.offsetHeight;
+
+      x += dx;
+      y += dy;
+
+      let bounced = false;
+
+      if (x <= 0 || x >= maxX) {
+        dx *= -1;
+        bounced = true;
+      }
+      if (y <= 0 || y >= maxY) {
+        dy *= -1;
+        bounced = true;
+      }
+
+      if (bounced) changeHue();
+
+      dvd.style.left = x + "px";
+      dvd.style.top = y + "px";
+
+      requestAnimationFrame(move);
+    }
+
+    function changeHue() {
+      hue = (hue + Math.floor(Math.random() * 90) + 45) % 360;
+      dvd.style.filter = `hue-rotate(${hue}deg)`;
+    }
+
+    move();
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<button id="like-button">Clicks: (0)</button>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const counter = new Counter({ workspace: 'boingagames' });
+    const likeButton = document.getElementById('button');
+
+    // Get initial count
+    counter.get('button-likes')
+      .then(result => {
+        likeButton.textContent = `Like (${result.value})`;
+      })
+      .catch(err => console.error(err));
+
+    // Add click handler
+    likeButton.addEventListener('click', function() {
+      counter.up('button-likes')
+        .then(result => {
+          likeButton.textContent = `Clicks: (${result.value})`;
+        })
+        .catch(err => console.error(err));
+    });
+  });
+</script>

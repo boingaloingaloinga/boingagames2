@@ -1,0 +1,558 @@
+/* ==========================================================================
+   BOINGA GAMES — design tokens
+   Direction: a photocopied / risograph-printed arcade flyer taped to a
+   corkboard, not a SaaS dashboard. Two spot colors that visibly "misprint"
+   over each other, flat ink, hard offset shadows instead of blur, halftone
+   dot texture instead of gradients.
+   ========================================================================== */
+:root{
+  --ink:      #14161f;   /* riso black */
+  --paper:    #efe8d3;   /* uncoated paper, used for cards/labels */
+  --paper-2:  #e3dabd;   /* slightly duller paper, for pressed/secondary bits */
+  --gold:     #f6b400;   /* riso "yellow" spot */
+  --punch:    #ef3f5b;   /* riso "red" spot */
+  --overprint:#f2792f;   /* where gold + punch overlap in real riso printing */
+  --line:     #14161f;   /* borders are ink, not grey */
+  --dim:      #8a8570;   /* muted caption text on paper */
+  --dim-ink:  #b9b6ce;   /* muted caption text on ink */
+
+  --font-display: "Anton", "Arial Narrow", sans-serif;
+  --font-body: "Space Grotesk", "Segoe UI", Arial, sans-serif;
+  --font-mono: "Space Mono", "Courier New", monospace;
+
+  --radius: 4px;
+  --shadow-hard: 5px 5px 0 var(--ink);
+  --shadow-hard-sm: 3px 3px 0 var(--ink);
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family: var(--font-body);
+  background-color: var(--ink);
+  background-image: radial-gradient(rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 5px 5px;
+  color: var(--paper);
+}
+
+img{ max-width:100%; display:block; }
+a{ color: inherit; text-decoration:none; }
+button, input{ font-family: inherit; }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+:focus-visible{
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.wrap{
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 20px 64px;
+}
+
+/* Reusable "misregistered print" headline treatment — the signature move.
+   A second color peeks out from behind the text like a cheap two-color
+   riso print that didn't quite line up. Used sparingly, on headlines only. */
+.misprint{
+  color: var(--paper);
+  text-shadow: 3px 3px 0 var(--punch), 6px 6px 0 var(--gold);
+}
+
+/* ==========================================================================
+   HERO — a flyer taped up top-left, not a centered landing-page banner
+   ========================================================================== */
+.hero{
+  position: relative;
+  padding: 40px 20px 0;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.hero-flyer{
+  position: relative;
+  display: inline-block;
+  transform: rotate(-1.4deg);
+}
+
+.tape{
+  position:absolute;
+  top:-14px; left:28px;
+  width:70px; height:26px;
+  background: rgba(239,232,211,.55);
+  border: 1px solid rgba(20,22,31,.15);
+  transform: rotate(-5deg);
+}
+
+.hero h1{
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(52px, 11vw, 108px);
+  letter-spacing: 1px;
+  line-height: .85;
+}
+
+.hero-sticker{
+  position:absolute;
+  right: -34px; bottom: -18px;
+  width: 84px; height: 84px;
+  border-radius: 50%;
+  border: 3px solid var(--ink);
+  overflow:hidden;
+  background: var(--paper);
+  box-shadow: var(--shadow-hard);
+  transform: rotate(8deg);
+}
+.hero-sticker img{ width:100%; height:100%; object-fit:cover; }
+
+.hero .quote{
+  margin: 18px 0 0;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--dim-ink);
+}
+
+.hater-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-top: 16px;
+  padding: 6px 12px;
+  background: var(--punch);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-weight:700;
+  font-size: 11.5px;
+  letter-spacing:.02em;
+  border: 2px solid var(--ink);
+  transform: rotate(-1.2deg);
+}
+
+.hero-links{
+  margin-top: 20px;
+  display:flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Ticket-stub button — replaces the generic rounded pill */
+.ticket-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding: 11px 18px;
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-weight:700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  cursor:pointer;
+  box-shadow: var(--shadow-hard-sm);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.ticket-btn:hover{ transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--ink); }
+.ticket-btn:active{ transform: translate(1px,1px); box-shadow: 1px 1px 0 var(--ink); }
+.ticket-btn.primary{ background: var(--gold); }
+
+/* Ticker — a torn diagonal ribbon instead of a soft-faded marquee bar */
+.ticker-wrap{
+  margin: 26px -20px 0;
+  transform: rotate(-.6deg);
+}
+.ticker{
+  background: var(--paper);
+  border-top: 2.5px solid var(--ink);
+  border-bottom: 2.5px solid var(--ink);
+  overflow:hidden;
+  white-space: nowrap;
+}
+.ticker-track{
+  display:inline-flex;
+  gap:40px;
+  padding: 9px 0;
+  animation: scroll-ticker 40s linear infinite;
+}
+.ticker-track span{
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--ink);
+}
+.ticker-track span b{
+  background: var(--gold);
+  padding: 1px 5px;
+  margin-right: 4px;
+  border: 1.5px solid var(--ink);
+}
+@keyframes scroll-ticker{
+  from{ transform: translateX(0); }
+  to{ transform: translateX(-50%); }
+}
+
+/* ==========================================================================
+   TOOLBAR — a punch-card ribbon, sticky
+   ========================================================================== */
+.toolbar{
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display:flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items:center;
+  padding: 16px 0;
+  margin: 30px 0 24px;
+  background: var(--ink);
+  border-bottom: 2.5px solid var(--paper-2);
+}
+
+.search-field{
+  flex: 1 1 240px;
+  position: relative;
+}
+.search-field input{
+  width:100%;
+  padding: 11px 14px;
+  border: 2.5px solid var(--paper-2);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 14px;
+}
+.search-field input::placeholder{ color: var(--dim-ink); }
+.search-field input:focus{ border-color: var(--gold); }
+
+.toolbar-btn{
+  padding: 11px 16px;
+  border-radius: var(--radius);
+  border: 2.5px solid var(--paper-2);
+  background: transparent;
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.toolbar-btn:hover{ border-color: var(--gold); color: var(--gold); }
+.toolbar-btn[aria-pressed="true"]{ background: var(--gold); border-color: var(--gold); color: var(--ink); }
+
+.result-count{
+  width:100%;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--dim-ink);
+  margin: -4px 0 0;
+}
+
+/* ==========================================================================
+   THEME POPOVER
+   ========================================================================== */
+.theme-pop-wrap{ position: relative; }
+.theme-pop{
+  display:none;
+  position:absolute;
+  right:0; top: calc(100% + 10px);
+  width: 236px;
+  padding: 14px;
+  background: var(--paper);
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-hard);
+  z-index: 30;
+}
+.theme-pop.open{ display:block; }
+.theme-pop h3{
+  margin: 0 0 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color: var(--ink);
+}
+.swatch-grid{
+  display:grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+.swatch{
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  cursor:pointer;
+  padding:0;
+}
+.swatch:hover{ transform: scale(1.12); }
+.swatch[aria-pressed="true"]{ box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--ink); }
+.theme-pop .upload-row{
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1.5px dashed var(--ink);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--dim);
+}
+.theme-pop .upload-row input{ display:block; margin-top:6px; font-size:11px; color: var(--dim); width:100%; }
+
+/* ==========================================================================
+   FAVORITES SHELF — a corkboard strip with pinned cards
+   ========================================================================== */
+.favorites{ margin-bottom: 30px; }
+.favorites-head{
+  display:flex; align-items:baseline; justify-content:space-between;
+  margin-bottom: 10px;
+}
+.favorites-head h2{
+  margin:0;
+  font-family: var(--font-display);
+  font-weight:400;
+  font-size: 22px;
+  letter-spacing: .5px;
+}
+.favorites-head span{ font-family: var(--font-mono); font-size:11px; color: var(--dim-ink); }
+
+.favorites-shelf{
+  display:flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items:flex-start;
+  min-height: 96px;
+  padding: 16px;
+  background: repeating-linear-gradient(135deg, #1b1e29, #1b1e29 8px, #191c26 8px, #191c26 16px);
+  border: 2.5px solid var(--paper-2);
+  border-radius: var(--radius);
+}
+.favorites-empty{
+  margin: auto;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--dim-ink);
+}
+.favorites-shelf .tile{ width: 92px; }
+
+/* ==========================================================================
+   GAME GRID — trading cards, caption always visible (works on touch too)
+   ========================================================================== */
+.grid-heading{ margin: 8px 0 14px; }
+.grid-heading h2{
+  margin:0;
+  font-family: var(--font-display);
+  font-weight:400;
+  font-size: 22px;
+  letter-spacing: .5px;
+}
+
+#games{
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+  gap: 14px;
+}
+
+.tile{
+  position: relative;
+  display:block;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-hard-sm);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.tile:hover, .tile:focus-visible{
+  transform: translate(-2px,-2px);
+  box-shadow: 5px 5px 0 var(--gold);
+  z-index: 2;
+}
+.tile .thumb{ aspect-ratio: 1/1; overflow:hidden; }
+.tile .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+.tile .label{
+  display:block;
+  padding: 5px 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  line-height:1.25;
+  color: var(--ink);
+  border-top: 1.5px solid var(--ink);
+  background: var(--paper);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.star{
+  position:absolute; top:5px; left:5px;
+  width:22px; height:22px;
+  display:flex; align-items:center; justify-content:center;
+  font-size: 15px;
+  color: var(--gold);
+  cursor:pointer;
+  z-index: 5;
+  user-select:none;
+  opacity: .55;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,.7));
+  transition: opacity .12s ease, transform .12s ease;
+}
+.star:hover{ opacity:1; transform: scale(1.2); }
+.star.favorited{ opacity:1; }
+
+.hidden{ display:none !important; }
+
+/* ==========================================================================
+   FOOTER — a small corkboard of odds and ends. George hides in the mix.
+   ========================================================================== */
+.footer{ margin-top: 60px; }
+
+.rating-section{
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 22px;
+  background: var(--paper);
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-hard);
+  color: var(--ink);
+  transform: rotate(.6deg);
+}
+.rating-section h2{
+  margin: 0 0 14px;
+  font-family: var(--font-display);
+  font-weight:400;
+  font-size: 20px;
+}
+.rating-row{ display:flex; gap:8px; }
+.rating-row input{
+  flex:1;
+  padding: 10px 12px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--paper-2);
+  color: var(--ink);
+  font-family: var(--font-mono);
+}
+.rating-result{
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #5a5644;
+  min-height: 1em;
+}
+
+.credits{
+  margin: 56px auto 0;
+  max-width: 520px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 18px 0;
+  border-top: 1.5px dashed var(--paper-2);
+}
+.credits-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--paper-2);
+  overflow:hidden;
+  background: var(--paper);
+  cursor: default;
+  padding:0;
+  margin:0;
+  opacity: .85;
+  font: inherit;
+  transition: opacity .12s ease;
+}
+.credits-thumb:hover{ opacity: 1; }
+.credits-thumb img{ width:100%; height:100%; object-fit:cover; }
+.credits-text{
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--dim-ink);
+  text-align:center;
+}
+
+/* ==========================================================================
+   CHEAT CONSOLE — secret code entry
+   ========================================================================== */
+.cheat-console{
+  position: fixed;
+  inset: auto 0 0 0;
+  transform: translateY(100%);
+  transition: transform .25s ease;
+  z-index: 100;
+  background: var(--paper);
+  border-top: 3px solid var(--ink);
+  box-shadow: 0 -10px 0 rgba(0,0,0,.15);
+}
+.cheat-console.open{ transform: translateY(0); }
+.cheat-console-inner{
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 20px 20px 24px;
+  position: relative;
+  color: var(--ink);
+}
+.cheat-console .eyebrow{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+.cheat-row{ display:flex; gap:8px; }
+.cheat-row input{
+  flex:1;
+  padding: 12px 14px;
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--paper-2);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 15px;
+}
+.cheat-row button{
+  padding: 12px 20px;
+  border: 2.5px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--gold);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-weight:800;
+  text-transform: uppercase;
+  cursor:pointer;
+}
+.cheat-message{
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #3a6b3f;
+  min-height: 1em;
+}
+.cheat-message.error{ color: var(--punch); }
+.cheat-close{
+  position:absolute; right:16px; top:14px;
+  background:none; border:none; color: var(--ink);
+  font-size:22px; line-height:1; cursor:pointer;
+}
+
+@media (max-width: 640px){
+  .hero-sticker{ display:none; }
+  #games{ grid-template-columns: repeat(auto-fill, minmax(94px, 1fr)); gap: 10px; }
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Boingaloingaloinga..</title>
+<style>
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: red;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  #deadImage {
+    max-width: 90vw;
+    max-height: 80vh;
+  }
+  #scaryText, #addressText {
+    position: fixed;
+    bottom: 80px;
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+  <img id="deadImage" src="images/dead.png" alt="" />
+  <div id="scaryText">boingaloingaloinga....</div>
+  <div id="addressText"></div>
+
+  <script>
+    const scaryText = document.getElementById('scaryText');
+    const addressText = document.getElementById('addressText');
+
+    setTimeout(() => {
+      scaryText.style.opacity = '1';
+    }, 2000);
+
+    setTimeout(() => {
+      scaryText.style.opacity = '0';
+      setTimeout(() => {
+        if (!navigator.geolocation) {
+          addressText.textContent = "BOINGALOINGALOINGA...";
+          addressText.style.opacity = '1';
+          closeSite();
+          return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+          position => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+              .then(response => response.json())
+              .then(data => {
+                if (data.address) {
+                  const addr = data.address.house_number ? data.address.house_number + ' ' : '';
+                  const road = data.address.road || '';
+                  const city = data.address.city || data.address.town || data.address.village || '';
+                  const state = data.address.state || '';
+                  const postcode = data.address.postcode || '';
+                  const country = data.address.country || '';
+
+                  let fullAddress = `${addr}${road}`;
+                  if(city) fullAddress += `, ${city}`;
+                  if(state) fullAddress += `, ${state}`;
+                  if(postcode) fullAddress += ` ${postcode}`;
+                  if(country) fullAddress += `, ${country}`;
+
+                  addressText.textContent = fullAddress;
+                } else {
+                  addressText.textContent = "BOINGALOINGALOINGA...";
+                }
+                addressText.style.opacity = '1';
+                closeSite();
+              })
+              .catch(() => {
+                addressText.textContent = "BOINGALOINGALOINGA...";
+                addressText.style.opacity = '1';
+                closeSite();
+              });
+          },
+          error => {
+            addressText.textContent = "BOINGALOINGALOINGA...";
+            addressText.style.opacity = '1';
+            closeSite();
+          }
+        );
+      }, 800);
+    }, 5000);
+
+    function closeSite() {
+      setTimeout(() => {
+        window.close();
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

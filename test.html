@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BoingaGames</title>
+<meta name="description" content="Boingaloingaloinga!">
+<link rel="icon" href="bg.png" type="image/png">
+<link rel="stylesheet" href="/main.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-flyer">
+    <span class="tape" aria-hidden="true"></span>
+    <h1 class="misprint">BOINGA</h1>
+    <span class="hero-sticker" aria-hidden="true">
+      <img src="https://files.catbox.moe/vbm3pi.gif" alt="">
+    </span>
+  </div>
+  <p class="quote">"Boingaloingaloinga!"</p>
+
+  <span class="hater-badge">Random Boinga Hater Of The Day: idk</span>
+
+  <div class="hero-links">
+    <a class="ticket-btn primary" href="movies/">Movies →</a>
+    <a class="ticket-btn" href="https://forms.gle/gU3bP4VYG3JZJ4JJ9" target="_blank" rel="noopener">Suggest a game</a>
+  </div>
+
+  <div class="ticker-wrap">
+    <div class="ticker" role="marquee" aria-label="Changelog">
+      <div class="ticker-track">
+        <span><b>8/3/2026</b> Adjustment — added a favorites shelf</span>
+        <span><b>8/3/2026</b> Games — none, looool</span>
+        <span><b>4/7/2026</b> Movies — added Madagascar and Madagascar: Escape 2 Africa</span>
+        <span><b>8/3/2026</b> Adjustment — added a favorites shelf</span>
+        <span><b>8/3/2026</b> Games — none, looool</span>
+        <span><b>4/7/2026</b> Movies — added Madagascar and Madagascar: Escape 2 Africa</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="toolbar">
+    <div class="search-field">
+      <input type="text" id="gameSearch" placeholder="Search..." aria-label="Search games">
+    </div>
+    <button id="sortBtn" class="toolbar-btn" aria-pressed="false">Sort: Default</button>
+
+    <div class="theme-pop-wrap">
+      <button id="toggle-themes-btn" class="toolbar-btn">Theme</button>
+      <div id="theme-pop" class="theme-pop">
+        <h3>Pick a theme</h3>
+        <div id="swatch-grid" class="swatch-grid"></div>
+        <div class="upload-row">
+          <label for="background-upload">Or upload a custom background</label>
+          <input type="file" id="background-upload" accept="image/*">
+        </div>
+      </div>
+    </div>
+
+    <p id="result-count" class="result-count"></p>
+  </div>
+
+  <section class="favorites">
+    <div class="favorites-head">
+      <h2>Your favorites</h2>
+      <span id="favorites-count"></span>
+    </div>
+    <div id="favorites-shelf" class="favorites-shelf"></div>
+  </section>
+
+  <section>
+    <div class="grid-heading">
+      <h2>All games</h2>
+    </div>
+    <div id="games"></div>
+  </section>
+
+  <footer class="footer">
+    <div class="rating-section">
+      <h2>Rate this website</h2>
+      <div class="rating-row">
+        <input type="number" id="ratingInput" placeholder="1–5" min="1" max="5">
+        <button id="submitRating" class="toolbar-btn">Submit</button>
+      </div>
+      <p id="ratingResult" class="rating-result"></p>
+    </div>
+
+    <div class="credits">
+      <img class="credits-thumb" src="bg.png" alt="" aria-hidden="true">
+      <button id="george-entrance" class="credits-thumb" aria-label="George">
+        <img src="curious-george.png" alt="">
+      </button>
+      <p class="credits-text">the best website ever made ever</p>
+    </div>
+  </footer>
+
+</main>
+
+<div id="cheat-console" class="cheat-console">
+  <div class="cheat-console-inner">
+    <button id="cheat-close" class="cheat-close" aria-label="Close">&times;</button>
+    <div class="cheat-row">
+      <input type="text" id="codeInput" placeholder="Enter your code…" autocomplete="off">
+      <button id="submitCode">Enter</button>
+    </div>
+    <p id="codeMessage" class="cheat-message"></p>
+  </div>
+</div>
+
+<audio id="background-music" loop></audio>
+
+<script src="app.js"></script>
+</body>
+</html>
